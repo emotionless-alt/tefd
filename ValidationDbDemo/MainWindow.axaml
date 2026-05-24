@@ -1,0 +1,71 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:vm="clr-namespace:ValidationDbDemo.ViewModels"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        x:CompileBindings="False"
+        mc:Ignorable="d" d:DesignWidth="850" d:DesignHeight="620"
+        Width="850" Height="620"
+        x:Class="ValidationDbDemo.MainWindow"
+        Title="ValidationDbDemo">
+    
+    <Window.DataContext>
+		<vm:MainViewModel/>
+    </Window.DataContext>
+
+    <StackPanel Margin="15" Spacing="10">
+
+        <TextBlock Text="Валидация данных через Binding"
+                   FontSize="22"
+                   FontWeight="Bold" />
+
+        <TextBox Text="{Binding Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 Watermark="Название товара"/>
+
+
+        <ComboBox ItemsSource="{Binding Categories}"
+                  SelectedItem="{Binding SelectedCategory, Mode=TwoWay}"
+                  DisplayMemberBinding="{Binding Name}"
+                  PlaceholderText="Выберите категорию"
+                  />
+
+
+        <TextBox Text="{Binding PriceText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                 Watermark="Цена"/>
+
+        <WrapPanel>
+			<Button Content="Загрузить товары"
+                    Command="{Binding LoadProductsCommand}"
+                    Margin="0,0,10,0"/>
+			<Button Content="Добавить товар"
+                    Command="{Binding AddProductCommand}"
+                    Margin="0,0,10,0"/>
+			<Button Content="Обновить выбранный товар"
+                    Command="{Binding UpdateProductCommand}"
+                    Margin="0,0,10,0"/>
+			<Button Content="Удалить выбранный товар"
+                    Command="{Binding DeleteProductCommand}"
+                    Margin="0,0,10,0"/>
+			<Button Content="Отчистить поля"
+                    Command="{Binding ClearInputCommand}"/>
+        </WrapPanel>
+
+        <TextBlock Text="{Binding Info}"
+                   FontWeight="SemiBold"/>
+
+        <DataGrid ItemsSource="{Binding Products}"
+                  SelectedItem="{Binding SelectedProduct}"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  Height="310">
+            <DataGrid.Columns>
+				<DataGridTextColumn Header="Id" Binding="{Binding Id}" />
+				<DataGridTextColumn Header="Название" Binding="{Binding Name}" />
+				<DataGridTextColumn Header="Цена" Binding="{Binding Price}" />
+				<DataGridTextColumn Header="Категория" Binding="{Binding CategoryName}" />
+            </DataGrid.Columns>
+        </DataGrid>
+		
+    </StackPanel>
+
+</Window>
