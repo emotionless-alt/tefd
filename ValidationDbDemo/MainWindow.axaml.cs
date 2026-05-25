@@ -7,6 +7,8 @@ namespace ValidationDbDemo
         public MainWindow()
         {
             InitializeComponent();
+
+
         }
     }
 }

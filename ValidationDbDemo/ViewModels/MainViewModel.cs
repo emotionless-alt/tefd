@@ -358,17 +358,7 @@ namespace ValidationDbDemo.ViewModels
                 AddError(nameof(Name), "Название товара обязательно");
             }
         }
-        private string _searchText;
-        public string SearchText
-        {
-            get => _searchText;
-            set
-            {
-                _searchText = value;
-                OnPropertyChanged();
-                
-            }
-        }
+        
 
 
         private void ValidateCategory()
